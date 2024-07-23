@@ -24,6 +24,8 @@ pipeline {
                             \$ftpPass = 'varun@98'
                             \$ftpPath = '/public_html/eat-n-split'
 
+                            Add-Type -Path 'C:\\Program Files (x86)\\WinSCP\\WinSCPnet.dll'
+
                             \$sessionOptions = New-Object WinSCP.SessionOptions -Property @{
                                 Protocol = [WinSCP.Protocol]::ftp
                                 HostName = \$ftpHost
