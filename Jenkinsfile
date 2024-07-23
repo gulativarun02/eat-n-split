@@ -14,17 +14,36 @@ pipeline {
             steps {
                 script {
                     def ftpHost = 'dtglive.online'
-                    def ftpUser = 'varun@dtglive.online'
-                    def ftpPassword = 'varun@98'
                     def ftpPath = '/public_html/eat-n-split'
 
                     withCredentials([usernamePassword(credentialsId: 'varun-ftp-id', usernameVariable: 'varun@dtglive.online', passwordVariable: 'varun@98')]) {
-                        powershell """
-                        ncftpput -R -v -u 'varun@dtglive.online' -p 'varun@98' 'dtglive.online' '/public_html/eat-n-split' build/*
-                        """
+                        
+                            powershell """
+                            \$ftpHost = 'dtglive.online'
+                            \$ftpUser = 'varun@dtglive.online'
+                            \$ftpPass = 'varun@98'
+                            \$ftpPath = '/public_html/eat-n-split'
+
+                            \$sessionOptions = New-Object WinSCP.SessionOptions -Property @{
+                                Protocol = [WinSCP.Protocol]::ftp
+                                HostName = \$ftpHost
+                                UserName = \$ftpUser
+                                Password = \$ftpPass
+                            }
+
+                            \$session = New-Object WinSCP.Session
+                            \$session.Open(\$sessionOptions)
+
+                            \$transferOptions = New-Object WinSCP.TransferOptions
+                            \$transferOptions.TransferMode = [WinSCP.TransferMode]::Binary
+
+                            \$session.PutFiles('build\\*', \$ftpPath, \$false, \$transferOptions).Check()
+                            \$session.Dispose()
+                            """
+                        
                     }
                 }
             }
-         }
+        }
     }
 }
