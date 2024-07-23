@@ -50,7 +50,7 @@ pipeline {
             steps {
                 script {
                     def ftpHost = 'dtglive.online'
-                    def ftpPath = '/public_html/eat-n-split'
+                    def ftpPath = 'https://www.dtglive.online/eat-n-split'
 
                     withCredentials([usernamePassword(credentialsId: 'varun-ftp-id', usernameVariable: 'varun@dtglive.online', passwordVariable: 'varun@98')]) {
                             bat """
@@ -58,7 +58,7 @@ pipeline {
                             echo varun@dtglive.online >> ftp.txt
                             echo varun@98 >> ftp.txt
                             echo binary >> ftp.txt
-                            echo cd '/public_html/eat-n-split' >> ftp.txt
+                            echo cd 'https://www.dtglive.online/eat-n-split' >> ftp.txt
                             echo lcd build >> ftp.txt
                             echo mput *.* >> ftp.txt
                             echo quit >> ftp.txt
