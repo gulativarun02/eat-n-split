@@ -19,7 +19,7 @@ pipeline {
                     def ftpPath = '/public_html/eat-n-split'
 
                     withCredentials([usernamePassword(credentialsId: 'varun-ftp-id', usernameVariable: 'varun@dtglive.online', passwordVariable: 'varun@98')]) {
-                        sh """
+                        powershell """
                         ncftpput -R -v -u 'varun@dtglive.online' -p 'varun@98' 'dtglive.online' '/public_html/eat-n-split' build/*
                         """
                     }
