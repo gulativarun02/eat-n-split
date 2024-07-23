@@ -20,7 +20,7 @@ pipeline {
 
                     withCredentials([usernamePassword(credentialsId: 'varun-ftp-id', usernameVariable: 'varun@dtglive.online', passwordVariable: 'varun@98')]) {
                         sh """
-                        ncftpput -R -v -u $FTP_USER -p $FTP_PASS $ftpHost $ftpPath build/*
+                        ncftpput -R -v -u ${FTP_USER} -p ${FTP_PASS} ${ftpHost} ${ftpPath} build/*
                         """
                     }
                 }
