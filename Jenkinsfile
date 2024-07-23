@@ -18,7 +18,7 @@ pipeline {
                     def ftpPassword = 'varun@98'
                     def ftpPath = '/public_html/eat-n-split'
 
-                    withCredentials([usernamePassword(credentialsId: 'ftp-credentials-id', usernameVariable: 'varun@dtglive.online', passwordVariable: 'varun@98')]) {
+                    withCredentials([usernamePassword(credentialsId: 'varun-ftp-id', usernameVariable: 'varun@dtglive.online', passwordVariable: 'varun@98')]) {
                         sh """
                         ncftpput -R -v -u $FTP_USER -p $FTP_PASS $ftpHost $ftpPath build/*
                         """
