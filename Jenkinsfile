@@ -54,7 +54,7 @@ pipeline {
 
                     withCredentials([usernamePassword(credentialsId: 'varun-ftp-id', usernameVariable: 'varun@dtglive.online', passwordVariable: 'varun@98')]) {
                             bat """
-                            echo open dtglive.online > ftp.txt
+                            echo open https://www.dtglive.online/ > ftp.txt
                             echo varun@dtglive.online >> ftp.txt
                             echo varun@98 >> ftp.txt
                             echo binary >> ftp.txt
